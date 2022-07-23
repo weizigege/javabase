@@ -17,4 +17,16 @@ public class Test01 {
         }
         System.out.println(array);
     }
+
+
+    @Test
+    public void testcase02(){
+        Array array = new Array(20);
+        for (int i = 0; i <10 ; i++) {
+            array.addlast(i);
+        }
+        System.out.println(array);
+        array.removeFirst();
+        System.out.println(array);
+    }
 }
