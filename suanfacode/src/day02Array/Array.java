@@ -1,5 +1,7 @@
 package day02Array;
 
+import sun.security.util.Length;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -10,11 +12,12 @@ import java.util.Objects;
  * @create: 2022-01-05 23:32
  **/
 public class Array<E> {
+
     private E[] data;
     private int size;
 
     public Array(int capacity) {
-        data = (E [])new Object[capacity];
+        data = (E[]) new Object[capacity];
         size = 0;
     }
 
@@ -44,7 +47,7 @@ public class Array<E> {
 
     public void addlast(E e) {
         if (size == data.length) {
-            resize(2*data.length);
+            resize(2 * data.length);
         }
         data[size] = e;
         size++;
@@ -54,11 +57,19 @@ public class Array<E> {
         add(0, e);
     }
 
-    E get(int index) {
+    public E get(int index) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("index illegall");
         }
         return data[index];
+    }
+
+    public E getFirst() {
+        return get(0);
+    }
+
+    public E getLast() {
+        return get(size - 1);
     }
 
     void set(int index, E e) {
@@ -90,38 +101,40 @@ public class Array<E> {
 
     /**
      * 删除元素
+     *
      * @param index
      * @return
      */
-    public E remove(int index){
+    public E remove(int index) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("remove fail");
         }
         E ret = data[index];
         for (int i = index + 1; i < size; i++) {
-            data[i-1]=data[i];
+            data[i - 1] = data[i];
         }
-        if (size==data.length/2){
-            resize(data.length/2);
+        if (size == data.length / 2) {
+            resize(data.length / 2);
         }
         size--;
         return ret;
     }
 
-    public E removeFirst(){
+    public E removeFirst() {
         return remove(0);
     }
 
-    public E removelast(){
-        return remove(size-1);
+    public E removelast() {
+        return remove(size - 1);
     }
 
-    public void removeElement(E e){
+    public void removeElement(E e) {
         int index = find(e);
-        if (index!=-1){
+        if (index != -1) {
             remove(index);
         }
     }
+
     /**
      * 索引处添加元素e
      *
@@ -130,7 +143,7 @@ public class Array<E> {
      */
     public void add(int index, E e) {
         if (size == data.length) {
-            resize(2*data.length);
+            resize(2 * data.length);
         }
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("add  fail!");
@@ -157,11 +170,15 @@ public class Array<E> {
         return sb.toString();
     }
 
-    public void resize(int NewCapacity){
-        E[] newarray = (E [])new Object[NewCapacity];
+    public void resize(int NewCapacity) {
+        E[] newarray = (E[]) new Object[NewCapacity];
         for (int i = 0; i < size; i++) {
-            newarray[i]=data[i];
+            newarray[i] = data[i];
         }
-        data=newarray;
+        data = newarray;
+    }
+
+    public int getCapacity() {
+        return data.length;
     }
 }
